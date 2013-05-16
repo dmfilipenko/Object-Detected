@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		video{
+			width : 400px;
+			height: 300px;
+		}
+	</style>
+</head>
+<body>
+<video autoplay></video>
+
+<script>
+	navigator.getMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+	navigator.getMedia( {video: true,audio: true},	// successCallback
+			function ( localMediaStream ){
+				var video = document.querySelector( 'video' );
+				video.src = window.URL.createObjectURL( localMediaStream );
+				video.onloadedmetadata = function ( e ){
+					// Do something with the video here.
+				};
+			},
+			// errorCallback
+			function ( err ){
+				console.log( "The following error occured: " + err );
+			}
+	);
+</script>
+</body>
+</html>
